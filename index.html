@@ -194,8 +194,11 @@ class="w3-display-container w3-grayscale-min">
       f4.style.display = "none";
       f5.style.display = "block";
     }
+    let gid1 = document.querySelector('#g_id_onload');
+    let gid2 = document.querySelector('#g_id_signin');
     let payment = document.querySelector('#container');
-    payment.style.display = "block";
+    [gid1, gid2, payment].map(ins=>ins.style.display = "inline-block");
+    // payment.style.display = "block";
   }
 </script>
 
@@ -368,6 +371,20 @@ class="w3-display-container w3-grayscale-min">
   <h1 class="w3-center w3-jumbo">Cart</h1>
   <p id="currentCart">Orders and such...</p>
   <div id="container" style="display:none"></div>
+  <!-- Signin -->
+      <div id="g_id_onload"
+         data-client_id="86822582342-ohkbhad3csa8tsg85h9cp37fiu628u97.apps.googleusercontent.com"
+         data-login_uri="https://empour.co/#cart"
+         data-auto_prompt="false">
+      </div>
+      <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-logo_alignment="left">
+      </div>
 </div>
 
 <!-- Payments -->
