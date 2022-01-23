@@ -150,7 +150,8 @@ class="w3-display-container w3-grayscale-min">
   }
 
   function p(name, type, callback) {
-    localStorage.setItem('Type', type);
+    let t = restaurant['Options'][type];
+    localStorage.setItem('Type', t);
     itemVal('Choose Size');
     let itemValue = document.querySelector('#itemValue');
     itemValue.innerHTML = "Choose Size";
