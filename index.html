@@ -171,29 +171,31 @@ class="w3-display-container w3-grayscale-min">
     let d = r.Drinks['Names'];
     if ( n == p[0] || n == p[1] || n == p[2] || n == p[3] || n == p[4]) {
       localStorage.setItem('selected', 'Pizza');
-      f1.style.display = "block"
-      f3.style.display = "none"
-      f4.style.display = "none"
-      f5.style.display = "none"
+      f1.style.display = "block";
+      f3.style.display = "none";
+      f4.style.display = "none";
+      f5.style.display = "none";
     } else if ( n == a[0] || n == a[1]) {
       localStorage.setItem('selected', 'Pasta');
-      f1.style.display = "none"
-      f3.style.display = "block"
-      f4.style.display = "none"
-      f5.style.display = "none"
+      f1.style.display = "none";
+      f3.style.display = "block";
+      f4.style.display = "none";
+      f5.style.display = "none";
     } else if ( n == s[0] || n == s[1]) {
       localStorage.setItem('selected', 'Starter');
-      f1.style.display = "none"
-      f3.style.display = "none"
-      f4.style.display = "block"
-      f5.style.display = "none"
+      f1.style.display = "none";
+      f3.style.display = "none";
+      f4.style.display = "block";
+      f5.style.display = "none";
     } else if ( n == d[0] || n == d[1] || n == d[2] || n == d[3]) {
       localStorage.setItem('selected', 'Drink');
-      f1.style.display = "none"
-      f3.style.display = "none"
-      f4.style.display = "none"
-      f5.style.display = "block"
+      f1.style.display = "none";
+      f3.style.display = "none";
+      f4.style.display = "none";
+      f5.style.display = "block";
     }
+    let payment = document.querySelector('#container');
+    payment.style.display = "block";
   }
 </script>
 
@@ -365,7 +367,7 @@ class="w3-display-container w3-grayscale-min">
 <div class="w3-container w3-red w3-grayscale-min w3-xlarge w3-padding-top-32">
   <h1 class="w3-center w3-jumbo">Cart</h1>
   <p id="currentCart">Orders and such...</p>
-  <div id="container"></div>
+  <div id="container" style="display:none"></div>
 </div>
 
 <!-- Payments -->
