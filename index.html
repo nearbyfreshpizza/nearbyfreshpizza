@@ -19,7 +19,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  
   gtag('config', token);
 </script>
 </head>
@@ -110,7 +109,7 @@ class="w3-display-container w3-grayscale-min">
     cart.innerHTML = null;
     console.log(customer.items);
     customer.items.map((item, idx)=>{
-      cart.innerHTML += `<h2><span onclick="removeItem(${item})"> x </span> ${item.size} ${item.name} ${item.price}</h2></br />`;
+      cart.innerHTML += `<h2><span onclick="removeItem(${item})"> [ x ] </span> ${item.size} ${item.name} ${item.price}</h2></br />`;
     });
 
   }
