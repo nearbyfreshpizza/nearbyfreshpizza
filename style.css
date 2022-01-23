@@ -2,8 +2,9 @@ body,h1,h2,h3,h4,h5,h6 {
   font-family: "Amatic SC", cursive; 
 }
 
-cart {
-  background-repeat: repeat-y;
+#cart {
+  background-image('cart.jpg');
+  background-repeat: repeat-x;
   width: 5%;
 }
 
@@ -90,6 +91,10 @@ cart {
 @keyframes fadeIn {
   from {opacity: 0}
   to {opacity: 1}
+}
+
+#itemValue {
+  color: #000;
 }
 
 .w3-black, .w3-hover-black:hover {

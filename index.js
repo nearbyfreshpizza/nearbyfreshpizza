@@ -24,18 +24,13 @@ function cart(button, type) {
   }
 }
 
-
-
 let restaurant = new Object();
 restaurant['Options'] = ['Order', 'Pizza', 'Pasta', 'Starters', 'Drinks', 'Delivery'];
-restaurant['Options'].map(o=>{
-  restaurant[o] = new Object();
-  // console.log(restaurant[o]);
-});
+restaurant['Options'].map(o=>{ restaurant[o] = new Object() });
 
 restaurant.Order['Pizzas']; //  = orderPizza();
-restaurant.Order['Customer']; //  = profile();
-restaurant.Order['Total']; //  = totalPrice();
+restaurant.Order['Customer'];
+restaurant.Order['Total'];
 
 restaurant.Pizza['Names'] = ['Margherita', 'Formaggio', 'Chicken', "Pineapple'o'clock", 'Meat Town'];
 restaurant.Pizza['Sizes'] = ['Personal', 'Small', 'Medium', 'Large', 'Extra Large']
