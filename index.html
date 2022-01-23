@@ -372,15 +372,9 @@ class="w3-display-container w3-grayscale-min">
 
 <!-- Payments -->
 <script>
-const baseRequest = {
-  apiVersion: 2,
-  apiVersionMinor: 0
-};
-
+const baseRequest = { apiVersion: 2, apiVersionMinor: 0 };
 const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
-
 const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
-
 const tokenizationSpecification = {
   type: 'PAYMENT_GATEWAY',
   parameters: {
@@ -423,7 +417,7 @@ function getGooglePaymentDataRequest() {
   paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
   paymentDataRequest.merchantInfo = {
     // merchantId: '12345678901234567890',
-    merchantName: 'Example Merchant'
+    merchantName: 'Empour Pizza'
   };
   return paymentDataRequest;
 }
@@ -444,7 +438,7 @@ function onGooglePayLoaded() {
         }
       })
       .catch(function(err) {
-        console.error(err);
+        console.error("Error Error Error Error: " + err);
       });
 }
 
@@ -459,12 +453,15 @@ function addGooglePayButton() {
 }
 
 function getGoogleTransactionInfo() {
-  return {
+  let v = 
+  {
     countryCode: 'US',
     currencyCode: 'USD',
     totalPriceStatus: 'FINAL',
-    totalPrice: customer.total,
+    totalPrice: customer.total
   };
+  console.log(v);
+  return v
 }
 
 function prefetchGooglePaymentData() {
