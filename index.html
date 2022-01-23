@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="UTF-8">
 <head>
-<title>Pizza</title>
+<meta charset="UTF-8">
+<title>Empour by Nearby Fresh</title>
 <script src='index.js'></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -14,6 +14,21 @@
 <body>
 <!-- Start Content -->
 <div id="home" class="w3-content">
+<script>
+  let id=[];
+  let customer = {
+    Num: parseFloat((1+Math.random())*1000000000).toPrecision(10),
+    items: [],
+    total: 0,
+  }
+    
+  id.push(localStorage.getItem('id'));
+  id.push(customer['Num']);
+  localStorage.setItem('Added', 'No');
+  localStorage.setItem('id',id);
+  // tNavig
+
+</script>
 
 <!-- Navbar (Sits on top) -->
 <div class="w3-top w3-bar w3-xlarge w3-black w3-opacity-min">
@@ -21,6 +36,7 @@
 <a href="#menu" class="w3-bar-item w3-button">MENU</a>
 <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
 <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
+<a href="#cart" class="w3-bar-item w3-button">CART</a>
 </div>
   
 <!-- Header image -->
@@ -44,54 +60,221 @@ class="w3-display-container w3-grayscale-min">
 <a href="#starters"><div class="w3-third w3-padding-large w3-hover-red">Starters</div></a>
 </div>
 
-<!--h1 id="pizza" class="w3-center w3-jumbo w3-padding-32">PIZZA</h1>
-<div class="w3-container w3-white w3-padding-32"-->
+<script>
+  async function addedToCart() {}
+  async function startAddedToCart() {
+    addedToCart()
+      .then(data=>data.JSON())
+      .catch(e=>e)
+  }
+  
+</script>
+
+<!-- Ordering -->
+
+<script>
+
+  async function addToCart() {
+    let item = new Object();
+    item.name = localStorage.getItem('Name');
+    item.size = localStorage.getItem('Pizza Size');
+    item.price = localStorage.getItem('Price');
+
+    customer.total += parseInt(item.price);
+    customer.items.push(item);
+
+    localStorage.setItem('Customer', JSON.stringify(customer));
+    localStorage.setItem('Added', 'Yes');
+
+    curCart();
+  }
+
+  function curCart() {
+    let cart = document.querySelector('#currentCart');
+    let totalAmt = document.createElement('h2');
+    totalAmt.innerHTML = customer.total;
+    cart.innerHTML = null;
+    console.log(customer.items);
+    customer.items.map((item, idx)=>{
+      cart.innerHTML += `<h2><span onclick="removeItem(${item})"> x </span> ${item.size} ${item.name} ${item.price}</h2></br />`;
+    });
+
+  }
+
+  // document.querySelectorAll('.cartSpan').onclick = removeItem(item);
+
+  function removeItem(x) {
+    console.log(x)
+    if (customer.item.num === num) {}
+  }
+
+  function closer() {
+    const oGH = document.querySelector('#orderGoesHere');
+    oGH.style.display = "none";
+    itemVal('Choose Size');
+
+    storeStuff('key', 'value');
+  }
+
+
+  function itemSize(pizzasize, price) {
+    itemVal(pizzasize);
+    storeStuff('Pizza Size',pizzasize);
+    storeStuff('Price', price);
+  }
+
+  function storeStuff(key, value) {
+    localStorage.setItem(key, value);
+  }
+
+  function unstoreStuff(name) {
+    localStorage.removeItem(name);
+  }
+
+  function itemVal(ue) {
+    let itemValue = document.querySelector('#itemValue');
+    itemValue.innerHTML = ue;
+  }
+
+  localStorage.setItem('Type', '');
+  function p(name, callback) {
+    itemVal('Choose Size');
+    let itemValue = document.querySelector('#itemValue');
+    itemValue.innerHTML = "Choose Size";
+    callback('Name', name);
+    orderGoesHere.style.display = "block";
+
+    let f1 = document.querySelector('#form1');
+    let f3 = document.querySelector('#form3');
+    let f4 = document.querySelector('#form4');
+      
+    let n = localStorage.getItem('Name');
+    let r = restaurant;
+    let p = r.Pizza['Names'];
+    let a = r.Pasta['Names'];
+    let s = r.Starters['Names'];
+    let d = r.Drinks['Names'];
+    if ( n == p[0] || n == p[1] || n == p[2] || n == p[3] || n == p[4]) {
+      localStorage.setItem('selected', 'Pizza');
+      f1.style.display = "block"
+      f3.style.display = "none"
+      f4.style.display = "none"
+    } else if ( n == a[0] || n == a[1]) {
+      localStorage.setItem('selected', 'Pasta');
+      f1.style.display = "none"
+      f3.style.display = "block"
+      f4.style.display = "none"
+    } else if ( n == s[0] || n == s[1]) {
+      localStorage.setItem('selected', 'Starter');
+      f1.style.display = "none"
+      f3.style.display = "none"
+      f4.style.display = "block"
+    } else if ( n == d[0] || n == d[1]) {
+      localStorage.setItem('selected', 'Drink');
+      f4.style.display = "block"
+    }
+  }
+</script>
+
+<div id='orderGoesHere' style="display:none"><!--id="myModal"-->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close" style="padding-right:10%" onclick="closer()">Close &times;</span>
+      <h2> Ordering </h2>
+    </div>
+    <div class="modal-body">
+      <form id="form1" style="display:none">
+        <input onclick="itemSize('Personal', 10)" type="button" value="Personal"></input>
+        <input onclick="itemSize('Small', 14)" type="button" value="Small"></input>
+        <input onclick="itemSize('Medium', 18)" type="button" value="Medium"></input>
+        <input onclick="itemSize('Large', 25)" type="button" value="Large"></input>
+        <input onclick="itemSize('Extra-Large', 30)" type="button" value="Extra-Large"></input>
+      </form>
+      <form id="form3" style="display:none">
+        <input onclick="itemSize('Meal', 14)" type="button" value="Meal"></input>
+      </form>
+      <form id="form4" style="display:none">
+        <input onclick="itemSize('Personal', 8)" type="button" value="Personal"></input>
+        <input onclick="itemSize('Family', 12)" type="button" value="Family"></input>
+      </form>
+      <h1 id="itemValue">Choose Size</h1>
+    </div>
+    <div class="modal-footer">
+      <form id="form2">
+        <input onclick="addToCart()" type="button" value="Add To Cart"></input>
+      </form>
+    </div>
+  </div>
+
+</div>
 
 <div id="pizza" class="w3-container w3-white w3-padding-32">
 
+<div type="button" onclick="p('Margherita', storeStuff)">
 <h1><b>Margherita</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Choose</span></h1>
-<p class="w3-text-grey">Fresh tomatoes, fresh mozzarella, fresh basil</p> <hr>
+<p class="w3-text-grey">Fresh tomatoes, fresh mozzarella, fresh basil</p>
+</div><hr>
 
+<div onclick="p('Formaggio', storeStuff)" type="button">
 <h1><b>Formaggio</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Pick Me</span></h1>
-<p class="w3-text-grey">Four cheeses (mozzarella, parmesan, pecorino, jarlsberg)</p> <hr>
+<p class="w3-text-grey">Four cheeses (mozzarella, parmesan, pecorino, jarlsberg)</p>
+</div><hr>
 
+<div type="button" onclick="p('Chicken', storeStuff)">
 <h1><b>Chicken</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Me Next</span></h1>
-<p class="w3-text-grey">Fresh tomatoes, mozzarella, chicken, onions</p> <hr>
+<p class="w3-text-grey">Fresh tomatoes, mozzarella, chicken, onions</p>
+</div><hr>
 
+<div type="button" onclick="p('Pineapple\'o\'clock', storeStuff)">
 <h1><b>Pineapple'o'clock</b> <span class="w3-right w3-tag w3-dark-grey w3-round">One More</span></h1>
-<p class="w3-text-grey">Fresh tomatoes, mozzarella, fresh pineapple, bacon, fresh basil</p> <hr>
+<p class="w3-text-grey">Fresh tomatoes, mozzarella, fresh pineapple, bacon, fresh basil</p>
+</div><hr>
 
+<div type="button" onclick="p('Meat Town', storeStuff)">
 <h1><b>Meat Town</b> <span class="w3-tag w3-red w3-round">Hot!</span><span class="w3-right w3-tag w3-dark-grey w3-round">Maybe Two</span></h1>
 <p class="w3-text-grey">Fresh tomatoes, mozzarella, hot pepporoni, hot sausage, beef, chicken</p>
+</div>
 
 </div>
 
 <h1 id="pasta" class="w3-center w3-jumbo w3-padding-32">PASTA</h1>
 <div class="w3-container w3-white w3-padding-32">
 
+<div type="button" onclick="p('Lasagna', storeStuff)">
 <h1><b>Lasagna</b> <span class="w3-tag w3-grey w3-round">Popular</span>
 <span class="w3-right w3-tag w3-dark-grey w3-round">Click</span></h1>
 <p class="w3-text-grey">Special sauce, mozzarella, parmesan, ground beef</p>
+</div>
 <hr>
+<div type="button" onclick="p('Ravioli', storeStuff)">
 <h1><b>Ravioli</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Click</span></h1>
 <p class="w3-text-grey">Ravioli filled with cheese</p>
+</div>
 <hr>
+<div type="button" onclick="p('Spaghetti Classica', storeStuff)">
 <h1><b>Spaghetti Classica</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Boom!</span></h1>
 <p class="w3-text-grey">Fresh tomatoes, onions, ground beef</p>
+</div>
 </div>
 
 <h1 id="starters" class="w3-center w3-jumbo w3-padding-32">STARTERS</h1>
 <div class="w3-container w3-white w3-padding-32">
 
+<div type="button" onclick="p('Today\'s Soup', storeStuff)">
 <h1><b>Today's Soup</b> <span class="w3-tag w3-grey w3-round">Seasonal</span>
 <span class="w3-right w3-tag w3-dark-grey w3-round">Simple</span></h1>
 <p class="w3-text-grey">Ask the waiter</p>
+</div>
 <hr>
+<div type="button" onclick="p('Bruschetta', storeStuff)">
 <h1><b>Bruschetta</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Medium</span></h1>
 <p class="w3-text-grey">Bread with pesto, tomatoes, onion, garlic</p>
+</div>
 <hr>
+<div type="button" onclick="p('Garlic Bread', storeStuff)">
 <h1><b>Garlic Bread</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Height</span></h1>
 <p class="w3-text-grey">Grilled ciabatta, garlic butter, onions</p>
+</div>
 </div>
 </div>
 
@@ -106,16 +289,8 @@ class="w3-display-container w3-grayscale-min">
 </p>
 <h1><b>Opening Hours</b></h1>
 <div class="w3-row">
-<div class="w3-half">
-  <p>Mon & Tue CLOSED</p>
-  <p>Wednesday 10.00 - 24.00</p>
-  <p>Thursday 10:00 - 24:00</p>
-</div>
-<div class="w3-half">
-  <p>Friday 10:00 - 12:00</p>
-  <p>Saturday 10:00 - 23:00</p>
-  <p>Sunday Closed</p>
-</div>
+<div class="w3-half"> <p>Mon & Tue  10am - 2am</p> <p>Wednesday 10am - 2am</p> <p>Thursday 10am - 2am</p> </div>
+<div class="w3-half"> <p>Friday 10am - 2am</p> <p>Saturday 10am - 2am</p> <p>Sunday 10am - 2am</p> </div>
 </div>    
 </div>
 
@@ -129,13 +304,20 @@ class="w3-display-container w3-grayscale-min">
 <form action="/action_page.php" target="_blank">
 <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" required name="Name"></p>
 <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="How many people" required name="People"></p>
-<p><input class="w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date" value="2020-11-16T20:00"></p>
+<p><input class="date w3-input w3-padding-16 w3-border" type="datetime-local" placeholder="Date and time" required name="date"></p>
 <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Message \ Special requirements" required name="Message"></p>
 <p><button class="w3-button w3-light-grey w3-block" type="submit">SEND MESSAGE</button></p>
 </form>
 
-<p class="w3-center w3-xlarge w3-padding-32">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank">w3.css</a></p>
+<p class="w3-center w3-xlarge w3-padding-32">Powered by <a href="https://www.zacscott.com" title="Future Perfect" target="_blank">Future Perfect</a></p>
 
+</div>
+
+<!-- Cart -->
+<img id="cart" src="cart.jpg" class="w3-image w3-greyscale" alt="Cart">
+<div class="w3-container w3-red w3-grayscale-min w3-xlarge w3-padding-top-32">
+  <h1 class="w3-center w3-jumbo">Cart</h1>
+  <p id="currentCart">Orders and such...</p>
 </div>
 
 <!-- End Content -->
