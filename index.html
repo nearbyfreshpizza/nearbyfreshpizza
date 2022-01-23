@@ -9,8 +9,11 @@
 <script src="https://www.w3schools.com/lib/w3.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Amatic+SC:wght@700&display=swap">
 <link rel="stylesheet" href="style.css">
-<style>
-</style>
+<meta property="og:title" content="Empour Pizza, Brought to you by Nearby Fresh of Future Perfect Ent." />
+<meta property="og:description" content="Order Pizza Nearby & Always Fresh, Get Beer, Wine, Drinks and Signature Starters." />
+<meta property="og:image" content="https://empour.co/img_pizza.jpg" />
+
+</head>
 <body>
 <!-- Start Content -->
 <div id="home" class="w3-content">
@@ -58,6 +61,7 @@ class="w3-display-container w3-grayscale-min">
 <a href="#pizza"><div class="w3-third w3-padding-large w3-red">Pizza</div></a>
 <a href="#pasta"><div class="w3-third w3-padding-large w3-hover-red">Pasta</div></a>
 <a href="#starters"><div class="w3-third w3-padding-large w3-hover-red">Starters</div></a>
+<a href="#drinks"><div class="w3-third w3-padding-large w3-hover-red">Drinks</div></a>
 </div>
 
 <script>
@@ -86,6 +90,7 @@ class="w3-display-container w3-grayscale-min">
     localStorage.setItem('Customer', JSON.stringify(customer));
     localStorage.setItem('Added', 'Yes');
 
+    closer();
     curCart();
   }
 
@@ -111,7 +116,7 @@ class="w3-display-container w3-grayscale-min">
   function closer() {
     const oGH = document.querySelector('#orderGoesHere');
     oGH.style.display = "none";
-    itemVal('Choose Size');
+    itemVal("Choose Size");
 
     storeStuff('key', 'value');
   }
@@ -136,8 +141,8 @@ class="w3-display-container w3-grayscale-min">
     itemValue.innerHTML = ue;
   }
 
-  localStorage.setItem('Type', '');
-  function p(name, callback) {
+  function p(name, type, callback) {
+    localStorage.setItem('Type', type);
     itemVal('Choose Size');
     let itemValue = document.querySelector('#itemValue');
     itemValue.innerHTML = "Choose Size";
@@ -147,6 +152,7 @@ class="w3-display-container w3-grayscale-min">
     let f1 = document.querySelector('#form1');
     let f3 = document.querySelector('#form3');
     let f4 = document.querySelector('#form4');
+    let f5 = document.querySelector('#form5');
       
     let n = localStorage.getItem('Name');
     let r = restaurant;
@@ -159,19 +165,25 @@ class="w3-display-container w3-grayscale-min">
       f1.style.display = "block"
       f3.style.display = "none"
       f4.style.display = "none"
+      f5.style.display = "none"
     } else if ( n == a[0] || n == a[1]) {
       localStorage.setItem('selected', 'Pasta');
       f1.style.display = "none"
       f3.style.display = "block"
       f4.style.display = "none"
+      f5.style.display = "none"
     } else if ( n == s[0] || n == s[1]) {
       localStorage.setItem('selected', 'Starter');
       f1.style.display = "none"
       f3.style.display = "none"
       f4.style.display = "block"
-    } else if ( n == d[0] || n == d[1]) {
+      f5.style.display = "none"
+    } else if ( n == d[0] || n == d[1] || n == d[2] || n == d[3]) {
       localStorage.setItem('selected', 'Drink');
-      f4.style.display = "block"
+      f1.style.display = "none"
+      f3.style.display = "none"
+      f4.style.display = "none"
+      f5.style.display = "block"
     }
   }
 </script>
@@ -197,6 +209,10 @@ class="w3-display-container w3-grayscale-min">
         <input onclick="itemSize('Personal', 8)" type="button" value="Personal"></input>
         <input onclick="itemSize('Family', 12)" type="button" value="Family"></input>
       </form>
+      <form id="form5" style="display:none">
+        <input onclick="itemSize('20 Ounce', 3)" type="button" value="20 Ounce"></input>
+        <input onclick="itemSize('2 Liter', 4)" type="button" value="2 Liter"></input>
+      </form>
       <h1 id="itemValue">Choose Size</h1>
     </div>
     <div class="modal-footer">
@@ -209,49 +225,47 @@ class="w3-display-container w3-grayscale-min">
 </div>
 
 <div id="pizza" class="w3-container w3-white w3-padding-32">
-
-<div type="button" onclick="p('Margherita', storeStuff)">
+<div type="button" onclick="p('Margherita', 1, storeStuff)">
 <h1><b>Margherita</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Choose</span></h1>
 <p class="w3-text-grey">Fresh tomatoes, fresh mozzarella, fresh basil</p>
 </div><hr>
 
-<div onclick="p('Formaggio', storeStuff)" type="button">
+<div onclick="p('Formaggio', 1, storeStuff)" type="button">
 <h1><b>Formaggio</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Pick Me</span></h1>
 <p class="w3-text-grey">Four cheeses (mozzarella, parmesan, pecorino, jarlsberg)</p>
 </div><hr>
 
-<div type="button" onclick="p('Chicken', storeStuff)">
+<div type="button" onclick="p('Chicken', 1, storeStuff)">
 <h1><b>Chicken</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Me Next</span></h1>
 <p class="w3-text-grey">Fresh tomatoes, mozzarella, chicken, onions</p>
 </div><hr>
 
-<div type="button" onclick="p('Pineapple\'o\'clock', storeStuff)">
+<div type="button" onclick="p('Pineapple\'o\'clock', 1, storeStuff)">
 <h1><b>Pineapple'o'clock</b> <span class="w3-right w3-tag w3-dark-grey w3-round">One More</span></h1>
 <p class="w3-text-grey">Fresh tomatoes, mozzarella, fresh pineapple, bacon, fresh basil</p>
 </div><hr>
 
-<div type="button" onclick="p('Meat Town', storeStuff)">
+<div type="button" onclick="p('Meat Town', 1, storeStuff)">
 <h1><b>Meat Town</b> <span class="w3-tag w3-red w3-round">Hot!</span><span class="w3-right w3-tag w3-dark-grey w3-round">Maybe Two</span></h1>
 <p class="w3-text-grey">Fresh tomatoes, mozzarella, hot pepporoni, hot sausage, beef, chicken</p>
 </div>
-
 </div>
 
 <h1 id="pasta" class="w3-center w3-jumbo w3-padding-32">PASTA</h1>
 <div class="w3-container w3-white w3-padding-32">
 
-<div type="button" onclick="p('Lasagna', storeStuff)">
+<div type="button" onclick="p('Lasagna', 2, storeStuff)">
 <h1><b>Lasagna</b> <span class="w3-tag w3-grey w3-round">Popular</span>
 <span class="w3-right w3-tag w3-dark-grey w3-round">Click</span></h1>
 <p class="w3-text-grey">Special sauce, mozzarella, parmesan, ground beef</p>
 </div>
 <hr>
-<div type="button" onclick="p('Ravioli', storeStuff)">
+<div type="button" onclick="p('Ravioli', 2, storeStuff)">
 <h1><b>Ravioli</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Click</span></h1>
 <p class="w3-text-grey">Ravioli filled with cheese</p>
 </div>
 <hr>
-<div type="button" onclick="p('Spaghetti Classica', storeStuff)">
+<div type="button" onclick="p('Spaghetti Classica', 2, storeStuff)">
 <h1><b>Spaghetti Classica</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Boom!</span></h1>
 <p class="w3-text-grey">Fresh tomatoes, onions, ground beef</p>
 </div>
@@ -260,22 +274,46 @@ class="w3-display-container w3-grayscale-min">
 <h1 id="starters" class="w3-center w3-jumbo w3-padding-32">STARTERS</h1>
 <div class="w3-container w3-white w3-padding-32">
 
-<div type="button" onclick="p('Today\'s Soup', storeStuff)">
+<div type="button" onclick="p('Today\'s Soup', 3, storeStuff)">
 <h1><b>Today's Soup</b> <span class="w3-tag w3-grey w3-round">Seasonal</span>
 <span class="w3-right w3-tag w3-dark-grey w3-round">Simple</span></h1>
 <p class="w3-text-grey">Ask the waiter</p>
 </div>
 <hr>
-<div type="button" onclick="p('Bruschetta', storeStuff)">
+<div type="button" onclick="p('Bruschetta', 3, storeStuff)">
 <h1><b>Bruschetta</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Medium</span></h1>
 <p class="w3-text-grey">Bread with pesto, tomatoes, onion, garlic</p>
 </div>
 <hr>
-<div type="button" onclick="p('Garlic Bread', storeStuff)">
+<div type="button" onclick="p('Garlic Bread', 3, storeStuff)">
 <h1><b>Garlic Bread</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Height</span></h1>
 <p class="w3-text-grey">Grilled ciabatta, garlic butter, onions</p>
 </div>
 </div>
+
+<h1 id="drinks" class="w3-center w3-jumbo w3-padding-32">DRINKS</h1>
+<div class="w3-container w3-white w3-padding-32">
+
+<div type="button" onclick="p('Coke', 4, storeStuff)">
+<h1><b>Coke</b><span class="w3-right w3-tag w3-dark-grey w3-round">Good</span></h1>
+<p class="w3-text-grey">Pizza and a Coke</p>
+</div>
+<hr>
+<div type="button" onclick="p('Sprite', 4, storeStuff)">
+<h1><b>Sprite</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Better</span></h1>
+<p class="w3-text-grey">Pizza and a Sprite</p>
+</div>
+<hr>
+<div type="button" onclick="p('Beer', 4, storeStuff)">
+<h1><b>Beer</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Best</span></h1>
+<p class="w3-text-grey">Pizza and a Beer</p>
+</div>
+<div type="button" onclick="p('Wine', 4, storeStuff)">
+<h1><b>Wine</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Bestest</span></h1>
+<p class="w3-text-grey">Pizza and Wine?</p>
+</div>
+</div>
+
 </div>
 
 <!-- About -->

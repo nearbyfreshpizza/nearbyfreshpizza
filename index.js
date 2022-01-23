@@ -1,8 +1,9 @@
-// window.onclick = function(event) {
-//   if(event.target == modal) {
-//     modal.style.display = "none";
-//   }
-// }
+const oGH = document.querySelector('#orderGoesHere');
+window.onclick = function(event) {
+  if(event.target == oGH) {
+    oGH.style.display = "none";
+  }
+}
 
 window.addEventListener('DOMContentLoaded', function(event) {
   localstore()
@@ -46,33 +47,20 @@ restaurant.Pasta['Prices'] = [10]
 restaurant.Starters['Names'] = ["Today's Salad", 'Bruschetta', 'Garlic Bread'];
 restaurant.Starters['Prices'] = [6.5, 8, 10]
 
-restaurant.Drinks['Names'] = ['Coke', '7 Up', 'Beer', 'Wine', 'Orange Juice'];
-restaurant.Drinks['Sizes'] = ['12 Ounce', '2 Litre'];
-restaurant.Drinks['Prices'] = [10, 14]
+restaurant.Drinks['Names'] = ['Coke', '7 Up', 'Beer', 'Wine'];
+restaurant.Drinks['Sizes'] = ['20 Ounce', '2 Liter'];
+restaurant.Drinks['Prices'] = [2.75, 3.25]
 
-restaurant.Delivery['fee'] = 2.50;
+restaurant.Delivery['fee'] = 3.50;
 restaurant.Delivery['tip'];
 
 function logs(event) {
   console.log(`Restaurant: ${JSON.stringify(restaurant)}`);
 }
 
-class Order {
-  constructor(name, items, amount) {
-    this.name = name;
-    this.items = items;
-    this.amt = amount;
-  }
-  set newAmount(amount) {
-    this.amt += amount;
-  }
-}
-
 const reducer = (previousValue, currentValue) => previousValue + currentValue;
 function calculatePrice(items) {
   restaurant[items].Price.reduce(reducer)
-  
-  let order = new Order(customerNumber, items, amount);
 }
 
 function localstore() {
