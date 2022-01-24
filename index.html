@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Empour by Nearby Fresh</title>
+<title>Empour Pizza by Nearby Fresh</title>
 <script src='index.js'></script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -110,16 +110,24 @@ class="w3-display-container w3-grayscale-min">
     cart.innerHTML = null;
     console.log(customer.items);
     customer.items.map((item, idx)=>{
-      cart.innerHTML += `<h2><span onclick="removeItem(${item})"> [ x ] </span> ${item.size} ${item.name} ${item.price}</h2></br />`;
+      cart.innerHTML += `<h2 id="ID_${idx}"><span onclick="removeItem(${idx})"> [ x ] </span> ${item.size} ${item.name} ${item.price}</h2></br />`;
     });
 
   }
 
-  // document.querySelectorAll('.cartSpan').onclick = removeItem(item);
-
-  function removeItem(x) {
-    console.log(x)
-    if (customer.item.num === num) {}
+  function removeItem(index) {
+    let idx = index - 1;
+    let re = document.querySelector(`#ID_${index}`);
+    console.log(re);
+    re.remove();
+    console.log("Removed");
+    let cart = document.querySelector('#currentCart');
+    if (cart.innerHTML == '<br>') {
+      cart.innerHTML = 'Orders and such...';
+    }
+    customer.total -= parseInt(customer.items[idx].price);
+    customer.items.splice(customer.items[idx]);
+    console.log(customer.items);
   }
 
   function closer() {
@@ -247,9 +255,10 @@ class="w3-display-container w3-grayscale-min">
 <p class="w3-text-grey">Fresh tomatoes, fresh mozzarella, fresh basil</p>
 </div><hr>
 
-<div onclick="p('Formaggio', 1, storeStuff)">
-<h1><b>Formaggio</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Pick Me</span></h1>
-<p class="w3-text-grey">Four cheeses (mozzarella, parmesan, pecorino, jarlsberg)</p>
+<div onclick="p('Pepperoni', 1, storeStuff)">
+<script> </script>
+<h1><b>Pepperoni</b> <span class="w3-right w3-tag w3-dark-grey w3-round">Pick Me</span></h1>
+<p class="w3-text-grey">Fresh tomatoe sauce, mozzarella, pepperoni's</p>
 </div><hr>
 
 <div onclick="p('Chicken', 1, storeStuff)">
@@ -368,11 +377,18 @@ class="w3-display-container w3-grayscale-min">
 
 </div>
 
+<script>
+  function t() {
+    document.querySelector('#totalPrice').innerHTML = ${customer.total};
+  }
+</script>
+
 <!-- Cart -->
 <img id="cart" src="cart.jpg" class="w3-image w3-greyscale" alt="Cart" style="width:100%">
 <div class="w3-container w3-red w3-grayscale-min w3-xlarge w3-padding-top-32">
   <h1 class="w3-center w3-jumbo">Cart</h1>
   <p id="currentCart">Orders and such...</p>
+  <h2 id="totalPrice"></h2>
   <div id="container" style="display:none"></div>
   <!-- Signin -->
       <div id="g_id_onload"

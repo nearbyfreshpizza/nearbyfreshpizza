@@ -32,7 +32,7 @@ restaurant.Order['Pizzas']; //  = orderPizza();
 restaurant.Order['Customer'];
 restaurant.Order['Total'];
 
-restaurant.Pizza['Names'] = ['Margherita', 'Formaggio', 'Chicken', "Pineapple'o'clock", 'Meat Town'];
+restaurant.Pizza['Names'] = ['Margherita', 'Pepperoni', 'Chicken', "Pineapple'o'clock", 'Meat Town'];
 restaurant.Pizza['Sizes'] = ['Personal', 'Small', 'Medium', 'Large', 'Extra Large']
 restaurant.Pizza['Prices'] = [10, 14, 18, 25, 30];
 
