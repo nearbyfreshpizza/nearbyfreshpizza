@@ -246,16 +246,16 @@ class="w3-display-container w3-grayscale-min">
         <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="27.5" data-item-type="Pizza" type="button" value="Extra-Large"></input>
       </form>
       <form id="form3" style="display:none">
-        <input onclick="itemSize(this.value, 14)" data-strike="12" data-item-type="Pasta" type="button" value="Meal"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="12" data-item-type="Pasta" type="button" value="Meal"></input>
       </form>
       <form id="form4" style="display:none">
-        <input onclick="itemSize(this.value, 8)" data-strike="7" data-item-type="Pasta" type="button" value="Personal"></input>
-        <input onclick="itemSize(this.value, 12)" data-strike="10.5" data-item-type="Pasta" type="button" value="Family"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="7" data-item-type="Starter" type="button" value="Personal"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="10.5" data-item-type="Starter" type="button" value="Family"></input>
       </form>
       <form id="form5" style="display:none">
-        <input onclick="itemSize(this.value, 2)" type="button" value="Small"></input>
-        <input onclick="itemSize(this.value, 2.5)" type="button" value="Medium"></input>
-        <input onclick="itemSize(this.value, 3)" type="button" value="Large"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="2" data-item-type="Drinks" type="button" value="Small"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="2.5" data-item-type="Drinks" type="button" value="Medium"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="3" data-item-type="Drinks" type="button" value="Large"></input>
       </form>
       <h1 id="itemValue">Choose Size</h1>
     </div>
