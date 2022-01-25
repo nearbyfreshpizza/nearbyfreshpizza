@@ -241,9 +241,9 @@ class="w3-display-container w3-grayscale-min">
       <form id="form1" style="display:none">
         <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike=8 data-item-type="Pizza" type="button" value="Personal"></input>
         <input onclick="itemSize(this.value, restaurant.Pizza['Price'][1])" data-strike="13" data-item-type="Pizza" type="button" value="Small"></input>
-        <input onclick="itemSize(this.value, 18)" data-strike="16" data-item-type="Pizza" type="button" value="Medium"></input>
-        <input onclick="itemSize(this.value, 25)" data-strike="23" data-item-type="Pizza" type="button" value="Large"></input>
-        <input onclick="itemSize(this.value, 30)" data-strike="27.5" data-item-type="Pizza" type="button" value="Extra-Large"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="16" data-item-type="Pizza" type="button" value="Medium"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="23" data-item-type="Pizza" type="button" value="Large"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="27.5" data-item-type="Pizza" type="button" value="Extra-Large"></input>
       </form>
       <form id="form3" style="display:none">
         <input onclick="itemSize(this.value, 14)" data-strike="12" data-item-type="Pasta" type="button" value="Meal"></input>
@@ -563,6 +563,7 @@ function onGooglePayLoaded() {
         console.error("Error Error Error Error: " + err);
       });
 }
+</script>
   <!--
 const baseRequest = { apiVersion: 2, apiVersionMinor: 0 };
 const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
