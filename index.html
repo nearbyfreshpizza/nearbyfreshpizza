@@ -96,100 +96,24 @@ class="w3-display-container w3-grayscale-min">
 <!-- Ordering -->
 
 <script>
-
-  async function addToCart() {
-    let item = new Object();
-    item.name = localStorage.getItem('Name');
-    item.size = localStorage.getItem('Pizza Size');
-    item.price = localStorage.getItem('Price');
-    
-    customer.total += parseInt(item.price);
-    customer.total *= 1.0725;
-    customer.total += restaurant['Delivery']['Fee'];
-    customer.items.push(item);
-
-    localStorage.setItem('Customer', JSON.stringify(customer));
-    localStorage.setItem('Added', 'Yes');
-
-    closer();
-    curCart();
-    customerTot();
-  }
   
-  function customerTot() {
-    document.querySelector('#totalPrice').innerHTML = parseInt(customer.total);
-  }
-
-  let cart = document.querySelector('#currentCart');
-  function curCart() {
-    let totalAmt = document.createElement('h2');
-    totalAmt.innerHTML = customer.total;
-    cart.innerHTML = null;
-    console.log(customer.items);
-    customer.items.map((item, idx)=>{
-      cart.innerHTML += `<h2 id="ID_${idx}"><span onclick="removeItem(${idx})"> [ x ] </span> ${item.size} ${item.name} ${item.price}</h2></br />`;
-    });
-
-  }
-  function removeItem(index) {
-    let idx = index - 1;
-    let re = document.querySelector(`#ID_${index}`);
-    let nxt = re.nextElementSibling;
-    [re,nxt].map(ele=>ele.remove());
-    if (cart.innerHTML == '<br>') {
-      cart.innerHTML = 'Orders and such...';
-    }
-    customer.total -= parseInt(customer.items[idx].price);
-    customer.items.splice(customer.items[idx]);
-    console.log(customer.items);
-    customerTot();
-  }
-
-  function closer() {
-    const oGH = document.querySelector('#orderGoesHere');
-    oGH.style.display = "none";
-    itemVal("Choose Size");
-
-    storeStuff('key', 'value');
-  }
-
-
-  function itemSize(pizzasize, price) {
-    itemVal(pizzasize);
-    storeStuff('Pizza Size',pizzasize);
-    storeStuff('Price', price);
-  }
-
-  function storeStuff(key, value) {
-    localStorage.setItem(key, value);
-  }
-
-  function unstoreStuff(name) {
-    localStorage.removeItem(name);
-  }
-
-  function itemVal(ue) {
-    let itemValue = document.querySelector('#itemValue');
-    itemValue.innerHTML = ue;
-  }
-
-  function p(name, type, callback) {
-    let t = restaurant['Options'][type];
-    localStorage.setItem('Type', t);
+  
+  function p(name, callback) {
     itemVal('Choose Size');
     let itemValue = document.querySelector('#itemValue');
     itemValue.innerHTML = "Choose Size";
     callback('Name', name);
     orderGoesHere.style.display = "block";
 
+    // HERE // HERE // HERE // HERE
     let f = ['f1', 'f3', 'f4', 'f5'];
     f.map(i=>document.querySelector(`#form${i}`));
-    
     // let f1 = document.querySelector('#form1');
     // let f3 = document.querySelector('#form3');
     // let f4 = document.querySelector('#form4');
     // let f5 = document.querySelector('#form5');
-      
+    // HERE // HERE // HERE // HERE
+    
     let n = localStorage.getItem('Name');
     let r = restaurant;
     let p = r.Pizza['Names'];
@@ -229,6 +153,84 @@ class="w3-display-container w3-grayscale-min">
     gid1.style.display = "block";
     // gid2.style.display = "block";
   }
+
+  async function addToCart() {
+    let item = new Object();
+    item.name = localStorage.getItem('Name');
+    item.size = localStorage.getItem('Pizza Size');
+    item.price = localStorage.getItem('Price');
+    
+    customer.total += parseInt(item.price);
+    customer.total *= 1.0725;
+    customer.total += restaurant['Delivery']['Fee'];
+    customer.items.push(item);
+
+    localStorage.setItem('Customer', JSON.stringify(customer));
+    localStorage.setItem('Added', 'Yes');
+
+    closer();
+    curCart();
+    customerTot();
+  }
+  
+  function customerTot() {
+    document.querySelector('#totalPrice').innerHTML = parseInt(customer.total);
+  }
+
+
+  function curCart() {
+    let cart = document.querySelector('#currentCart');
+    let totalAmt = document.createElement('h2');
+    totalAmt.innerHTML = customer.total;
+    cart.innerHTML = null;
+    console.log(customer.items);
+    customer.items.map((item, idx)=>{
+      cart.innerHTML += `<h2 id="ID_${idx}"><span onclick="removeItem(${idx})"> [ x ] </span> ${item.size} ${item.name} ${item.price}</h2></br />`;
+    });
+
+  }
+  function removeItem(index) {
+    let cart = document.querySelector('#currentCart');
+    let idx = index - 1;
+    let re = document.querySelector(`#ID_${index}`);
+    let nxt = re.nextElementSibling;
+    [re,nxt].map(ele=>ele.remove());
+    if (cart.innerHTML == '<br>') {
+      cart.innerHTML = 'Orders and such...';
+    }
+    customer.total -= parseInt(customer.items[idx].price);
+    customer.items.splice(customer.items[idx]);
+    console.log(customer.items);
+    customerTot();
+  }
+
+  function closer() {
+    const oGH = document.querySelector('#orderGoesHere');
+    oGH.style.display = "none";
+    itemVal("Choose Size");
+  }
+
+
+  function itemSize(pizzasize, price, itemType) {
+    itemVal(pizzasize);
+    storeStuff('Type', itemType);
+    storeStuff('Pizza Size',pizzasize);
+    storeStuff('Price', price);
+  }
+
+  function storeStuff(key, value) {
+    localStorage.setItem(key, value);
+  }
+
+  function unstoreStuff(name) {
+    localStorage.removeItem(name);
+  }
+
+  function itemVal(ue) {
+    let itemValue = document.querySelector('#itemValue');
+    itemValue.innerHTML = ue;
+  }
+
 </script>
 
 <div id='orderGoesHere' style="display:none"><!--id="myModal"-->
@@ -239,23 +241,23 @@ class="w3-display-container w3-grayscale-min">
     </div>
     <div class="modal-body">
       <form id="form1" style="display:none">
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike=8 data-item-type="Pizza" type="button" value="Personal"></input>
-        <input onclick="itemSize(this.value, restaurant.Pizza['Price'][1])" data-strike="13" data-item-type="Pizza" type="button" value="Small"></input>
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="16" data-item-type="Pizza" type="button" value="Medium"></input>
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="23" data-item-type="Pizza" type="button" value="Large"></input>
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="27.5" data-item-type="Pizza" type="button" value="Extra-Large"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=8 data-item-type="Pizza" type="button" value="Personal"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=13 data-item-type="Pizza" type="button" value="Small"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=16 data-item-type="Pizza" type="button" value="Medium"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=23 data-item-type="Pizza" type="button" value="Large"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=27.5 data-item-type="Pizza" type="button" value="Extra-Large"></input>
       </form>
       <form id="form3" style="display:none">
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="12" data-item-type="Pasta" type="button" value="Meal"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=12 data-item-type="Pasta" type="button" value="Meal"></input>
       </form>
       <form id="form4" style="display:none">
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="7" data-item-type="Starter" type="button" value="Personal"></input>
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="10.5" data-item-type="Starter" type="button" value="Family"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=7 data-item-type="Starter" type="button" value="Personal"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=10.5 data-item-type="Starter" type="button" value="Family"></input>
       </form>
       <form id="form5" style="display:none">
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="2" data-item-type="Drinks" type="button" value="Small"></input>
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="2.5" data-item-type="Drinks" type="button" value="Medium"></input>
-        <input onclick="itemSize(this.value, this.dataset['strike'])" data-strike="3" data-item-type="Drinks" type="button" value="Large"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=2 data-item-type="Drinks" type="button" value="Small"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=2.5 data-item-type="Drinks" type="button" value="Medium"></input>
+        <input onclick="itemSize(this.value, this.dataset['strike'], this.dataset['item-type'])" data-strike=3 data-item-type="Drinks" type="button" value="Large"></input>
       </form>
       <h1 id="itemValue">Choose Size</h1>
     </div>
