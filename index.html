@@ -39,13 +39,13 @@
 <script>
   let id=[];
   let customer = {
-    Num: parseFloat((1+Math.random())*1000000000).toPrecision(10),
+    logs: parseFloat((1+Math.random())*1000000000).toPrecision(10),
     items: [],
     total: 0,
   }
     
   id.push(localStorage.getItem('id'));
-  id.push(customer['Num']);
+  id.push(customer['logs']);
   localStorage.setItem('Added', 'No');
   localStorage.setItem('id',id);
   // tNavig
