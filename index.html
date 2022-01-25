@@ -135,8 +135,9 @@ class="w3-display-container w3-grayscale-min">
   function removeItem(index) {
     let idx = index - 1;
     let re = document.querySelector(`#ID_${index}`);
-    console.log(re);
-    re.remove();
+    let nxt = re.nextElementSibling;
+    console.log(re + " " + nxt);
+    [re,nxt].remove();
     console.log("Removed");
     let cart = document.querySelector('#currentCart');
     if (cart.innerHTML == '<br>') {
