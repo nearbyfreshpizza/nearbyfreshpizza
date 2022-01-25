@@ -113,8 +113,13 @@ class="w3-display-container w3-grayscale-min">
 
     closer();
     curCart();
+    customerTot();
   }
-
+  
+  function customerTot() {
+    document.querySelector('#totalPrice').innerHTML = customer.total;
+  }
+  
   function curCart() {
     let cart = document.querySelector('#currentCart');
     let totalAmt = document.createElement('h2');
@@ -391,9 +396,7 @@ class="w3-display-container w3-grayscale-min">
 </div>
 
 <script>
-  function t() {
-    document.querySelector('#totalPrice').innerHTML = ${customer.total};
-  }
+
 </script>
 
 <!-- Cart -->
