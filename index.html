@@ -135,9 +135,7 @@ class="w3-display-container w3-grayscale-min">
     let idx = index - 1;
     let re = document.querySelector(`#ID_${index}`);
     let nxt = re.nextElementSibling;
-    console.log(re + " " + nxt);
     [re,nxt].map(ele=>ele.remove());
-    console.log("Removed");
     if (cart.innerHTML == '<br>') {
       cart.innerHTML = 'Orders and such...';
     }
@@ -184,10 +182,13 @@ class="w3-display-container w3-grayscale-min">
     callback('Name', name);
     orderGoesHere.style.display = "block";
 
-    let f1 = document.querySelector('#form1');
-    let f3 = document.querySelector('#form3');
-    let f4 = document.querySelector('#form4');
-    let f5 = document.querySelector('#form5');
+    let f = ['f1', 'f3', 'f4', 'f5'];
+    f.map(i=>document.querySelector(`#form${i}`));
+    
+    // let f1 = document.querySelector('#form1');
+    // let f3 = document.querySelector('#form3');
+    // let f4 = document.querySelector('#form4');
+    // let f5 = document.querySelector('#form5');
       
     let n = localStorage.getItem('Name');
     let r = restaurant;
