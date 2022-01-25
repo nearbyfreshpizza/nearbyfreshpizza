@@ -131,7 +131,7 @@ class="w3-display-container w3-grayscale-min">
     });
 
   }
-
+  let cart = document.querySelector('#currentCart');
   function removeItem(index) {
     let idx = index - 1;
     let re = document.querySelector(`#ID_${index}`);
@@ -139,7 +139,6 @@ class="w3-display-container w3-grayscale-min">
     console.log(re + " " + nxt);
     [re,nxt].map(ele=>ele.remove());
     console.log("Removed");
-    let cart = document.querySelector('#currentCart');
     if (cart.innerHTML == '<br>') {
       cart.innerHTML = 'Orders and such...';
     }
