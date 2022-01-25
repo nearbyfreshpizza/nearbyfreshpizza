@@ -46,8 +46,8 @@ restaurant.Drinks['Names'] = ['Coke', '7 Up', 'Beer', 'Wine'];
 restaurant.Drinks['Sizes'] = ['20 Ounce', '2 Liter'];
 restaurant.Drinks['Prices'] = [2.75, 3.25]
 
-restaurant.Delivery['fee'] = 3.50;
-restaurant.Delivery['tip'];
+restaurant.Delivery['Fee'] = 3.50;
+restaurant.Delivery['Tip'];
 
 function logs(event) {
   console.log(`Restaurant: ${JSON.stringify(restaurant)}`);
