@@ -102,8 +102,10 @@ class="w3-display-container w3-grayscale-min">
     item.name = localStorage.getItem('Name');
     item.size = localStorage.getItem('Pizza Size');
     item.price = localStorage.getItem('Price');
-
+    
     customer.total += parseInt(item.price);
+    customer.total *= 1.0725;
+    customer.total += restaurant['Delivery']['Fee'];
     customer.items.push(item);
 
     localStorage.setItem('Customer', JSON.stringify(customer));
@@ -231,22 +233,23 @@ class="w3-display-container w3-grayscale-min">
     </div>
     <div class="modal-body">
       <form id="form1" style="display:none">
-        <input onclick="itemSize('Personal', 10)" type="button" value="Personal"></input>
-        <input onclick="itemSize('Small', 14)" type="button" value="Small"></input>
-        <input onclick="itemSize('Medium', 18)" type="button" value="Medium"></input>
-        <input onclick="itemSize('Large', 25)" type="button" value="Large"></input>
-        <input onclick="itemSize('Extra-Large', 30)" type="button" value="Extra-Large"></input>
+        <input onclick="itemSize(this.value, 10)" type="button" value="Personal"></input>
+        <input onclick="itemSize(this.value, 14)" type="button" value="Small"></input>
+        <input onclick="itemSize(this.value, 18)" type="button" value="Medium"></input>
+        <input onclick="itemSize(this.value, 25)" type="button" value="Large"></input>
+        <input onclick="itemSize(this.value, 30)" type="button" value="Extra-Large"></input>
       </form>
       <form id="form3" style="display:none">
-        <input onclick="itemSize('Meal', 14)" type="button" value="Meal"></input>
+        <input onclick="itemSize(this.value, 14)" type="button" value="Meal"></input>
       </form>
       <form id="form4" style="display:none">
-        <input onclick="itemSize('Personal', 8)" type="button" value="Personal"></input>
-        <input onclick="itemSize('Family', 12)" type="button" value="Family"></input>
+        <input onclick="itemSize(this.value, 8)" type="button" value="Personal"></input>
+        <input onclick="itemSize(this.value, 12)" type="button" value="Family"></input>
       </form>
       <form id="form5" style="display:none">
-        <input onclick="itemSize('20 Ounce', 3)" type="button" value="20 Ounce"></input>
-        <input onclick="itemSize('2 Liter', 4)" type="button" value="2 Liter"></input>
+        <input onclick="itemSize(this.value, 2)" type="button" value="Small"></input>
+        <input onclick="itemSize(this.value, 2.5)" type="button" value="Medium"></input>
+        <input onclick="itemSize(this.value, 3)" type="button" value="Large"></input>
       </form>
       <h1 id="itemValue">Choose Size</h1>
     </div>
