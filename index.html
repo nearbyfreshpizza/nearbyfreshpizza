@@ -161,14 +161,14 @@ class="w3-display-container w3-grayscale-min">
     
     customer.total += parseInt(item.price);
     customer.total *= 1.0725;
-    let fee = sessionStorage.setItem('f');
+    let fee = sessionStorage.setItem('f', 'true');
     if (!fee) {
       customer.total += restaurant['Delivery']['Fee'];
+      sessionStorage.setItem('f', 'true');
     }
     customer.items.push(item);
 
     localStorage.setItem('Customer', JSON.stringify(customer));
-    localStorage.setItem('Added', 'Yes');
 
     closer();
     curCart();
