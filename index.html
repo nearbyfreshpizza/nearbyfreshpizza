@@ -445,9 +445,18 @@ function getGoogleIsReadyToPayRequest() {
 function getGooglePaymentDataRequest() {
   const paymentDataRequest = Object.assign({}, baseRequest);
   Object.defineProperties(paymentDataRequest, function() {
-    allowedPaymentMethods: [cardPaymentMethod],
-    transactionInfo: getGoogleTransactionInfo(),
-    merchantInfo: { merchantName: 'Empour by Nearby Fresh' }
+    allowedPaymentMethods: {
+      value: [cardPaymentMethod],
+      writable: true
+    },
+    transactionInfo: {
+      value: getGoogleTransactionInfo(),
+      writable: true
+    },
+    merchantInfo: {
+      value: { merchantName: 'Empour by Nearby Fresh' },
+      writable: true
+    }
   });
   return paymentDataRequest;
 }
