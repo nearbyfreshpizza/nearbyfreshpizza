@@ -363,7 +363,7 @@ class="w3-display-container w3-grayscale-min">
 <!-- About -->
 <div id="about" class="w3-container w3-red w3-grayscale w3-xlarge w3-padding-64">
 <h1 class="w3-center w3-jumbo">About</h1>
-<p>The Pizza Restaurant was founded in blabla by Mr. Italiano in lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p>Empour Pizza was founded in San Francisco one day in one of the Berkeley University Libraries. Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 <p><strong>The Chef?</strong> Mr. Italiano himself<img src="/chef.png" style="width:150px" class="w3-circle w3-right" alt="Chef"></p>
 <p>We are proud of our interiors.</p>
 <p class="w3-padding-16 w3-stretch">
@@ -563,119 +563,6 @@ function onGooglePayLoaded() {
       });
 }
 </script>
-  <!--
-const baseRequest = { apiVersion: 2, apiVersionMinor: 0 };
-const allowedCardNetworks = ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "VISA"];
-const allowedCardAuthMethods = ["PAN_ONLY", "CRYPTOGRAM_3DS"];
-const tokenizationSpecification = {
-  type: 'PAYMENT_GATEWAY',
-  parameters: {
-    'gateway': 'example',
-    'gatewayMerchantId': 'exampleGatewayMerchantId'
-  }
-};
-
-const baseCardPaymentMethod = {
-  type: 'CARD',
-  parameters: {
-    allowedAuthMethods: allowedCardAuthMethods,
-    allowedCardNetworks: allowedCardNetworks
-  }
-};
-
-const cardPaymentMethod = Object.assign(
-  {},
-  baseCardPaymentMethod,
-  {
-    tokenizationSpecification: tokenizationSpecification
-  }
-);
-
-let paymentsClient = null;
-
-function getGoogleIsReadyToPayRequest() {
-  return Object.assign(
-      {},
-      baseRequest,
-      {
-        allowedPaymentMethods: [baseCardPaymentMethod]
-      }
-  );
-}
-
-function getGooglePaymentDataRequest() {
-  const paymentDataRequest = Object.assign({}, baseRequest);
-  paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
-  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
-  paymentDataRequest.merchantInfo = {
-    // merchantId: '12345678901234567890',
-    merchantName: 'Empour Pizza'
-  };
-  return paymentDataRequest;
-}
-
-function getGooglePaymentsClient() {
-  if ( paymentsClient === null ) {
-    paymentsClient = new google.payments.api.PaymentsClient({environment: 'TEST'});
-  }
-  return paymentsClient;
-}
-
-
-function addGooglePayButton() {
-  const paymentsClient = getGooglePaymentsClient();
-  const button =
-      paymentsClient.createButton({
-        onClick: onGooglePaymentButtonClicked,
-        allowedPaymentMethods: [baseCardPaymentMethod]
-      });
-  document.getElementById('container').appendChild(button);
-}
-
-function getGoogleTransactionInfo() {
-  let v = 
-  {
-    countryCode: 'US',
-    currencyCode: 'USD',
-    totalPriceStatus: 'FINAL',
-    totalPrice: customer.total
-  };
-  console.log(v);
-  return v
-}
-
-function prefetchGooglePaymentData() {
-  const paymentDataRequest = getGooglePaymentDataRequest();
-  paymentDataRequest.transactionInfo = {
-    totalPriceStatus: 'NOT_CURRENTLY_KNOWN',
-    currencyCode: 'USD'
-  };
-  const paymentsClient = getGooglePaymentsClient();
-  paymentsClient.prefetchPaymentData(paymentDataRequest);
-}
-
-function onGooglePaymentButtonClicked() {
-  const paymentDataRequest = getGooglePaymentDataRequest();
-  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
-
-  const paymentsClient = getGooglePaymentsClient();
-  paymentsClient.loadPaymentData(paymentDataRequest)
-      .then(function(paymentData) {
-        processPayment(paymentData);
-      })
-      .catch(function(err) {
-        console.error(err);
-      });
-}
-function processPayment(paymentData) {
-    console.log(paymentData);
-  paymentToken = paymentData.paymentMethodData.tokenizationData.token;
-}</script>
-<script async
-  src="https://pay.google.com/gp/p/js/pay.js"
-  onload="onGooglePayLoaded()"></script-->
-
-<!-- End Content -->
 </div>
 </body>
 </html>
