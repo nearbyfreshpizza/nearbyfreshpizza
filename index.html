@@ -54,7 +54,7 @@
 
 <!-- Navbar (Sits on top) -->
 <div class="w3-top w3-bar w3-xlarge w3-black w3-opacity-min">
-<a href="#home" class="w3-bar-item w3-button">HOME</a>
+<a href="#home" data-name="home" class="w3-bar-item w3-button">HOME</a>
 <a href="#menu" class="w3-bar-item w3-button">MENU</a>
 <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
 <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
@@ -77,14 +77,16 @@ class="w3-display-container w3-grayscale-min">
 <div id="menu" class="w3-container w3-black w3-xxlarge w3-padding-64">
 <h1 class="w3-center w3-jumbo w3-padding-32">THE MENU</h1>
 <div class="w3-row w3-center w3-border w3-border-dark-grey">
-<a href="#pizza"><div class="w3-third w3-padding-large w3-red">Pizza</div></a>
+<a onclick="pizza()" href="#pizza"><div class="w3-third w3-padding-large w3-red">Pizza</div></a>
 <a href="#pasta"><div class="w3-third w3-padding-large w3-hover-red">Pasta</div></a>
 <a href="#starters"><div class="w3-third w3-padding-large w3-hover-red">Starters</div></a>
 <a href="#drinks"><div class="w3-third w3-padding-large w3-hover-red">Drinks</div></a>
 </div>
 
 <script>
-  async function addedToCart() {}
+  async function pizza() {
+    localStorage.setItem('r',this);
+  }
   async function startAddedToCart() {
     addedToCart()
       .then(data=>data.JSON())
