@@ -161,7 +161,10 @@ class="w3-display-container w3-grayscale-min">
     
     customer.total += parseInt(item.price);
     customer.total *= 1.0725;
-    customer.total += restaurant['Delivery']['Fee'];
+    let fee = sessionStorage.setItem('f');
+    if (!fee) {
+      customer.total += restaurant['Delivery']['Fee'];
+    }
     customer.items.push(item);
 
     localStorage.setItem('Customer', JSON.stringify(customer));
@@ -173,7 +176,7 @@ class="w3-display-container w3-grayscale-min">
   }
   
   function customerTot() {
-    document.querySelector('#totalPrice').innerHTML = parseInt(customer.total);
+    document.querySelector('#totalPrice').innerHTML = customer.total;
   }
 
 
@@ -190,15 +193,17 @@ class="w3-display-container w3-grayscale-min">
   }
   function removeItem(index) {
     let cart = document.querySelector('#currentCart');
-    let idx = index - 1;
     let re = document.querySelector(`#ID_${index}`);
     let nxt = re.nextElementSibling;
     [re,nxt].map(ele=>ele.remove());
     if (cart.innerHTML == '<br>') {
       cart.innerHTML = 'Orders and such...';
+      customer.total = 0;
+      customer.items = [];
+    } else {
+      customer.total -= customer.items[index]['price']; 
+      customer.items.splice(customer.items[index]);
     }
-    customer.total -= parseInt(customer.items[idx].price);
-    customer.items.splice(customer.items[idx]);
     console.log(customer.items);
     customerTot();
   }
