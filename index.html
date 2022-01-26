@@ -435,37 +435,20 @@ const baseCardPaymentMethod = {
 };
 
 
-const cardPaymentMethod = Object.assign(
-  {},
-  baseCardPaymentMethod,
-  {
-    tokenizationSpecification: tokenizationSpecification
-  }
-);
-
-
+const cardPaymentMethod = Object.assign( {}, baseCardPaymentMethod, {tokenizationSpecification: tokenizationSpecification} );
 let paymentsClient = null;
 
-
 function getGoogleIsReadyToPayRequest() {
-  return Object.assign(
-      {},
-      baseRequest,
-      {
-        allowedPaymentMethods: [baseCardPaymentMethod]
-      }
-  );
+  return Object.assign( {}, baseRequest, {allowedPaymentMethods: [baseCardPaymentMethod]} );
 }
-
 
 function getGooglePaymentDataRequest() {
   const paymentDataRequest = Object.assign({}, baseRequest);
-  paymentDataRequest.allowedPaymentMethods = [cardPaymentMethod];
-  paymentDataRequest.transactionInfo = getGoogleTransactionInfo();
-  paymentDataRequest.merchantInfo = {
-
-    merchantName: 'Example Merchant'
-  };
+  Object.defineProperties(paymentDataRequest, function() {
+    allowedPaymentMethods: [cardPaymentMethod],
+    transactionInfo: getGoogleTransactionInfo(),
+    merchantInfo: { merchantName: 'Empour by Nearby Fresh' }
+  });
   return paymentDataRequest;
 }
 
@@ -477,33 +460,16 @@ function getGooglePaymentsClient() {
   return paymentsClient;
 }
 
-
-
 function addGooglePayButton() {
   const paymentsClient = getGooglePaymentsClient();
-  const button =
-      paymentsClient.createButton({onClick: onGooglePaymentButtonClicked});
+  const button = paymentsClient.createButton({onClick: onGooglePaymentButtonClicked});
   document.getElementById('container').appendChild(button);
 }
 
-
-function getGoogleTransactionInfo() {
-  return {
-    countryCode: 'US',
-    currencyCode: 'USD',
-    totalPriceStatus: 'FINAL',
-    // set to cart total
-    totalPrice: parseInt(customer.total)
-  };
-}
-
-
+function getGoogleTransactionInfo() {return { countryCode: 'US', currencyCode: 'USD', totalPriceStatus: 'FINAL', /* set to cart total */ totalPrice: parseInt(customer.total)};}
 function prefetchGooglePaymentData() {
   const paymentDataRequest = getGooglePaymentDataRequest();
-  paymentDataRequest.transactionInfo = {
-    totalPriceStatus: 'NOT_CURRENTLY_KNOWN',
-    currencyCode: 'USD'
-  };
+  paymentDataRequest.transactionInfo = { totalPriceStatus: 'NOT_CURRENTLY_KNOWN', currencyCode: 'USD' };
   const paymentsClient = getGooglePaymentsClient();
   paymentsClient.prefetchPaymentData(paymentDataRequest);
 }
@@ -515,18 +481,12 @@ function onGooglePaymentButtonClicked() {
 
   const paymentsClient = getGooglePaymentsClient();
   paymentsClient.loadPaymentData(paymentDataRequest)
-      .then(function(paymentData) {
-        // handle the response
-        processPayment(paymentData);
-      })
-      .catch(function(err) {
-        // show error in developer console for debugging
-        console.error(err);
-      });
+    .then(function(paymentData) { processPayment(paymentData); })   // handle the response
+    .catch(function(err) { console.error(err) });                   // show error in developer console for debugging
 }
 
 function processPayment(paymentData) {
-    console.log(paymentData);
+  console.log(paymentData);
   paymentToken = paymentData.paymentMethodData.tokenizationData.token;
 }
 </script>
@@ -538,20 +498,8 @@ function processPayment(paymentData) {
   <p id="currentCart">Orders and such...</p>
   <h2 id="totalPrice"></h2>
   <div id="container" style="display:none"></div>
-  <!-- Signin -->
-      <div id="g_id_onload"
-         data-client_id="86822582342-ohkbhad3csa8tsg85h9cp37fiu628u97.apps.googleusercontent.com"
-         data-login_uri="https://empour.co/#cart"
-         data-auto_prompt="false">
-      </div>
-      <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline"
-         data-text="sign_in_with"
-         data-shape="rectangular"
-         data-logo_alignment="left">
-      </div>
+  <div id="g_id_onload" data-client_id="86822582342-ohkbhad3csa8tsg85h9cp37fiu628u97.apps.googleusercontent.com" data-login_uri="https://empour.co/#cart" data-auto_prompt="false"> </div>
+  <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left"></div>
 </div>
 
 <!-- Payments -->
@@ -566,7 +514,7 @@ function onGooglePayLoaded() {
         }
       })
       .catch(function(err) {
-        console.error("Error Error Error Error: " + err);
+        console.error("Error: " + err);
       });
 }
 </script>
