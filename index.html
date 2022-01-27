@@ -444,7 +444,7 @@ function getGoogleIsReadyToPayRequest() {
 
 function getGooglePaymentDataRequest() {
   const paymentDataRequest = Object.assign({}, baseRequest);
-  Object.defineProperties(paymentDataRequest, function() {
+  Object.defineProperties(paymentDataRequest, {
     allowedPaymentMethods: {
       value: [cardPaymentMethod],
       writable: true
